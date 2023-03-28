@@ -1,0 +1,22 @@
+{
+    "name": "iterable_range",
+    "version": "1.0.0",
+    "description": "",
+    "type": "module",
+    "main": "dist/index.js",
+    "scripts": {
+        "typecheck": "tsc --noEmit",
+        "build": "vite build",
+        "test": "vitest",
+        "coverage": "vitest run --coverage"
+    },
+    "devDependencies": {
+        "prettier": "^2.8.7",
+        "typescript": "^5.0.2",
+        "vite": "^4.2.1",
+        "vitest": "^0.29.7"
+    },
+    "keywords": [],
+    "author": "Luis Merino <mail@luismerino.name>",
+    "license": "ISC"
+}

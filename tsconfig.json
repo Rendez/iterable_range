@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "target": "es2020",
+        "module": "nodenext",
+        "moduleResolution": "nodenext",
+        "types": ["vitest/importMeta"],
+        "declaration": true,
+        "outDir": "./dist",
+        "strict": true,
+        "skipDefaultLibCheck": true,
+        "skipLibCheck": true
+    }
+}
