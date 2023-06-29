@@ -1,7 +1,5 @@
 # Iterable Range
 
-!! Not production ready yet !!
-
 Typescript iterator/iterable range based on Rust's [`std::ops::Range`](https://doc.rust-lang.org/std/ops/struct.Range.html).
 
 The range start..end contains all values with start <= x < end. It is empty if start >= end.
@@ -44,7 +42,36 @@ console.log(list); // [0, 1, 2, 3, 4, 5]
 
 ## API
 
-### rev()
+### Iterable Helpers
+
+There is a proposal, that brings multiple [helper functions to Iterator](https://github.com/tc39/proposal-iterator-helpers)
+
+You can use it today by utilizing core-js-pure:
+
+```js
+import { from as iterFrom } from "core-js-pure/features/iterator";
+
+// or if it's working for you (it should work according to the docs,
+// but hasn't for me for some reason):
+// import iterFrom from "core-js-pure/features/iterator/from";
+
+let m = new Map();
+
+m.set("13", 37);
+m.set("42", 42);
+
+const arr = iterFrom(m.values())
+  .map((val) => val * 2)
+  .toArray();
+
+// prints "[74, 84]"
+console.log(arr);
+```
+The good part is that is being rapidly adopted by the main vendors, [Chrome intends to ship them on version 117](https://chromestatus.com/feature/5102502917177344) and there's strong support for Firefox and Safari, which means soon this will be widespread.
+
+### Iterator build-ins
+
+#### rev()
 
 Reverses an iterator’s direction.
 
@@ -56,7 +83,7 @@ for (const x of range(0, 5).rev()) {
 console.log(list); // [4, 3, 2, 1, 0]
 ```
 
-### step()
+#### step()
 
 Creates an iterator starting at the same point, but stepping by the given amount at each iteration.
 
@@ -68,7 +95,7 @@ for (const x of range(0, 5).step(2)) {
 console.log(list); // [0, 2, 4]
 ```
 
-### clone()
+#### clone()
 
 Creates an iterator which clones all of its elements.
 
@@ -86,7 +113,7 @@ for (const x of clone) {
 console.log(list); // [0, 1, 2, 3, 4, 0, 1, 2, 3, 4]
 ```
 
-### len()
+#### len()
 
 Returns the exact remaining length of the iterator.
 
@@ -100,7 +127,7 @@ for (const x of iter) {
 }
 ```
 
-### contains()
+#### contains()
 
 Returns `true` if item is contained in the range.
 
@@ -112,7 +139,7 @@ console.log(range(0, 10).contains(5)); // true
 console.log(range(0, 10, true).contains(10)); // true
 ```
 
-### empty()
+#### empty()
 
 Returns `true` if the range contains no items.
 
